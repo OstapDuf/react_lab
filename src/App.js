@@ -2,19 +2,17 @@
 import './App.css';
 import { Footer } from './footer/footer';
 import {Header} from "./header/header"
-import { Card, DownButton } from './main/downer';
-import { Upper } from './main/upper';
+import { Home } from './main/home/home';
+import { Routers } from './router';
+
+
 
 
 
 function App() {
   return (
       <>
-      <Header/>
-      <Upper/>
-      <Card></Card>
-      <DownButton></DownButton>
-      <Footer></Footer>
+      <Routers></Routers>
       </>
     );
 }
