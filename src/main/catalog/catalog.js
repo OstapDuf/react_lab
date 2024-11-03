@@ -1,11 +1,11 @@
 import FiltersButtons from "./FilteringTab/filterTab";
-import {CardDisplay} from "./card/cardDisplay";
+import { CardDisplay } from "./card/cardDisplay";
 
 
 export const Catalog = () => {
-    return(
+    return (
         <>
-        <FiltersButtons/>
+            <FiltersButtons />
             <CardDisplay />
         </>
 
