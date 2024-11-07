@@ -1,5 +1,7 @@
 import { Col, Container, Row ,Button } from "react-bootstrap"
 import "./main.css"
+import React, { useState } from "react";
+import { animals, CardDisplay } from "../catalog/card/cardDisplay";  // Переконайтесь, що `CardDisplay` імпортується правильно.
 
 
 const TailCard = (props) =>{
@@ -33,10 +35,27 @@ export const Card = () => {
   
 }
 
-export const DownButton = () => {
-    return(
-        <Container className="center__button mt-5">
-        <Button variant="secondary" className="button__main" >View more</Button>
-        </Container>
-    )
-}
+export const   DownButton = () => {
+
+  const [showMore, setShowMore] = useState(false);
+
+
+  const viewMore = () => {
+    setShowMore(true);
+  }
+  const buttonStyle = showMore ? { display: 'none' } : {};
+
+  return (
+    <Container className="center__button mt-5">
+    
+      <Button variant="secondary" onClick={viewMore} style={buttonStyle} className="button__main">
+        View More
+      </Button>
+      
+      
+      {showMore && <CardDisplay animals={animals} />}
+    </Container>
+  );
+};
+
+

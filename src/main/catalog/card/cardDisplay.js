@@ -1,5 +1,6 @@
 import {CardTail} from "./cardTail.js";
 import './cards.css';
+import filteredAnimals from "../FilteringTab/filterTab.js"
 
 export const animals = [
     {
@@ -40,11 +41,11 @@ export const animals = [
     }
 ];
 
-export const CardDisplay = () => {
+export const CardDisplay = ({animals = []}) => {
     return (
         <div className="cards" >
             {animals.map((animal, index) => (
-                <CardTail key={index} animal={animal}/>
+                <CardTail key={index} animal={animal} index={index}/>
             ))}
         </div>
     )

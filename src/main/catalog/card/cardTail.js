@@ -1,8 +1,9 @@
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
+import { Link } from 'react-router-dom';
 
 export const CardTail = (props) => {
-    const { animal = {} } = props;
+    const { animal = {},index} = props;
     return (
         <Card style={{ width: '15rem', border: '1px solid #ddd' }}>
             <Card.Img
@@ -26,7 +27,9 @@ export const CardTail = (props) => {
                     <div style={{ fontSize: '1.25rem', fontWeight: 'bold', color: '#333' }}>{animal.price}</div>
                 </div>
 
-                <Button variant="dark" style={{ width: '100%', marginTop: 'auto' }}>View more</Button>
+                <Link to={`/catalog/${index}`} style={{ marginTop: 'auto' }}>
+                    <Button variant="dark" style={{ width: '100%' }}>View more</Button>
+                </Link>
             </Card.Body>
         </Card>
     );
