@@ -1,7 +1,8 @@
 import { Col, Container, Row ,Button } from "react-bootstrap"
 import "./main.css"
-import React, { useState } from "react";
-import { animals, CardDisplay } from "../catalog/card/cardDisplay";  // Переконайтесь, що `CardDisplay` імпортується правильно.
+import React, { useEffect, useState } from "react";
+import {CardDisplay } from "../catalog/card/cardDisplay.js";  
+import axios from "axios";
 
 
 const TailCard = (props) =>{
@@ -38,6 +39,21 @@ export const Card = () => {
 export const   DownButton = () => {
 
   const [showMore, setShowMore] = useState(false);
+  const [animals, setAnimals] = useState([])
+
+  useEffect(() => {
+    const fetchAnimals = async () => {
+        try {
+            const response = await axios.get('http://localhost:3001/animals');
+            setAnimals(response.data);
+        
+        } catch (error) {
+          console.error(error)
+        }
+    };
+
+    fetchAnimals();
+}, []);
 
 
   const viewMore = () => {

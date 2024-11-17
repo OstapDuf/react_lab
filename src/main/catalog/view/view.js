@@ -1,11 +1,13 @@
 import { Button, Col, Container, Row } from "react-bootstrap";
 import { useParams, Link } from "react-router-dom";
-import { animals } from "../card/cardDisplay";
+import { contextAnimals } from "../../../data/dataRecive.js";
+import { useContext } from "react";
 
 const AnimalDetail = () => {
+  const {animals} = useContext(contextAnimals)
     const { id } = useParams();
     const animal = animals[id];
-
+    console.log("view",animals)
     if (!animal) {
         return <p>Animal not found.</p>; 
     }

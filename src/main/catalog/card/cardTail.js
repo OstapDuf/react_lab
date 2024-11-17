@@ -1,5 +1,4 @@
-import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
+import { Card, Button } from 'react-bootstrap'; 
 import { Link } from 'react-router-dom';
 
 export const CardTail = (props) => {
@@ -21,7 +20,6 @@ export const CardTail = (props) => {
                     {animal.paragraph}
                 </Card.Text>
 
-                {/* Контейнер для ціни */}
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '10px' }}>
                     <div style={{ fontWeight: 'bold' }}>Price:</div>
                     <div style={{ fontSize: '1.25rem', fontWeight: 'bold', color: '#333' }}>{animal.price}</div>

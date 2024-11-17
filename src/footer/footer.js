@@ -1,5 +1,5 @@
 import { Col, Container, Row } from "react-bootstrap"
-import { Logo } from "../header/logo"
+import { Logo } from "../header/logo.js"
 
 
 export const Footer = () => {

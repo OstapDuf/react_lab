@@ -1,5 +1,5 @@
-import { Card, DownButton } from "./downer"
-import { Upper } from "./upper"
+import { Card, DownButton } from "./downer.js"
+import { Upper } from "./upper.js"
 
 export const Home = () =>{
     return (

@@ -1,5 +1,5 @@
 import { Col, Container, Nav, Navbar, NavLink, Row } from "react-bootstrap";
-import { Logo } from "./logo";
+import { Logo } from "./logo.js";
 import { Link } from "react-router-dom";
 
 

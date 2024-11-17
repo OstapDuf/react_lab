@@ -1,15 +1,17 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 
-import { Home } from "./main/home/home"
-import Layout from "./components/layout"
-import { Catalog } from "./main/catalog/catalog"
-import { Cart } from "./main/cart/cart"
-import AnimalDetail from "./main/catalog/view/view"
+import { Home } from "./main/home/home.js"
+import Layout from "./components/layout.js"
+import { Catalog } from "./main/catalog/catalog.js"
+import { Cart } from "./main/cart/cart.js"
+import AnimalDetail from "./main/catalog/view/view.js"
+import { AnimalsProvider } from "./data/dataRecive.js"
 
 
 
 export const Routers = () => {
-    return( <>
+    return( 
+        <AnimalsProvider>
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<Layout/>}>
@@ -20,6 +22,7 @@ export const Routers = () => {
                 </Route>
             </Routes>
         </BrowserRouter>
-        </>)
+        </AnimalsProvider>
+        )
    
 }

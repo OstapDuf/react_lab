@@ -1,94 +1,81 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Form, Button, Row, Col } from 'react-bootstrap';
-import { animals, CardDisplay } from "../card/cardDisplay";
+import { contextAnimals } from "../../../data/dataRecive.js";
+
 
 function FiltersButtons() {
     const [selectedCategory, setSelectedCategory] = useState('');
     const [selectedPriceRange, setSelectedPriceRange] = useState('');
     const [searchQuery, setSearchQuery] = useState('');
-    const [filteredAnimals, setFilteredAnimals] = useState(animals);
-    const [appliedCategory, setAppliedCategory] = useState(''); // для застосованої категорії
-    const [appliedPriceRange, setAppliedPriceRange] = useState(''); // для застосованого діапазону ціни
-
-    const handleCategoryChange = (event) => {
-        setSelectedCategory(event.target.value);
-    };
-
-    const handlePriceRangeChange = (event) => {
-        setSelectedPriceRange(event.target.value);
-    };
-
-    const handleSearchChange = (e) => {
-        setSearchQuery(e.target.value);
-    };
+    const { animalReceive } = useContext(contextAnimals);
 
     const applyFilters = () => {
-        setAppliedCategory(selectedCategory);
-        setAppliedPriceRange(selectedPriceRange);
+        const query = {};
+        if (selectedCategory) query.category = selectedCategory;
+        if (selectedPriceRange) query.price = selectedPriceRange;
+        if (searchQuery) query.search = searchQuery;
+
+        animalReceive(query); 
     };
 
-    // Динамічний пошук
     useEffect(() => {
-        const filtered = animals.filter((animal) => {
-            const searchFilter = animal.title.toLowerCase().includes(searchQuery.toLowerCase());
-            const categoryMatch = appliedCategory ? animal.title === appliedCategory : true;
-            const price = parseFloat(animal.price.replace('$', ''));
-            const priceMatch = (() => {
-                if (!appliedPriceRange) return true;
-                if (appliedPriceRange === '0-1500') return price >= 0 && price <= 1500;
-                if (appliedPriceRange === '1501-2000') return price >= 1501 && price <= 2000;
-                if (appliedPriceRange === '2000+') return price > 2000;
-                return true;
-            })();
+        const query = {};
+        if (selectedCategory) query.category = selectedCategory;
+        if (selectedPriceRange) query.price = selectedPriceRange;
+        if (searchQuery) query.search = searchQuery;
 
-            return searchFilter && categoryMatch && priceMatch;
-        });
-
-        setFilteredAnimals(filtered);
-    }, [searchQuery, appliedCategory, appliedPriceRange]); // Спрацьовує при зміні пошуку або застосованих фільтрів
+        animalReceive(query); 
+    }, [searchQuery]);
 
     return (
-        <>
-            <div className="d-flex justify-content-between align-items-center">
-                <div className="d-flex align-items-center">
-                    <Row>
-                        <Col xs="auto">
-                            <Form.Group controlId="categorySelect">
-                                <Form.Control as="select" value={selectedCategory} onChange={handleCategoryChange}>
-                                    <option value="">Select Category</option>
-                                    <option value="Majestic Lion">Majestic Lion</option>
-                                    <option value="Graceful Deer">Graceful Deer</option>
-                                    <option value="Mighty Elephant">Mighty Elephant</option>
-                                    <option value="Snoop Dogg">Snoop Dogg</option>
-                                </Form.Control>
-                            </Form.Group>
-                        </Col>
-                        <Col xs="auto">
-                            <Form.Group controlId="priceRangeSelect">
-                                <Form.Control as="select" value={selectedPriceRange} onChange={handlePriceRangeChange}>
-                                    <option value="">Select Price Range</option>
-                                    <option value="0-1500">$0 - 1500</option>
-                                    <option value="1501-2000">$1501 - $2000</option>
-                                    <option value="2000+">2000+</option>
-                                </Form.Control>
-                            </Form.Group>
-                        </Col>
-                    </Row>
-                    <Button variant="primary" style={{ marginLeft: "2rem" }} onClick={applyFilters}>Apply</Button>
-                </div>
-
-                <Form.Group controlId="searchInput">
-                    <Form.Control
-                        type="text"
-                        placeholder="Search for an animal..."
-                        value={searchQuery}
-                        onChange={handleSearchChange}
-                    />
-                </Form.Group>
-            </div>
-
-            <CardDisplay animals={filteredAnimals} />
-        </>
+        <div className="d-flex justify-content-between align-items-center">
+            <Row>
+                <Col xs="auto">
+                    <Form.Group controlId="categorySelect">
+                        <Form.Control
+                            as="select"
+                            value={selectedCategory}
+                            onChange={(e) => setSelectedCategory(e.target.value)}
+                        >
+                            <option value="">Виберіть категорію</option>
+                            <option value="Majestic Lion">Величний лев</option>
+                            <option value="Graceful Deer">Грайливий олень</option>
+                            <option value="Mighty Elephant">Могутній слон</option>
+                            <option value="Snoop Dogg">Снуп Догг</option>
+                        </Form.Control>
+                    </Form.Group>
+                </Col>
+                <Col xs="auto">
+                    <Form.Group controlId="priceRangeSelect">
+                        <Form.Control
+                            as="select"
+                            value={selectedPriceRange}
+                            onChange={(e) => setSelectedPriceRange(e.target.value)}
+                        >
+                            <option value="">Виберіть ціновий діапазон</option>
+                            <option value="0-1500">$0 - 1500</option>
+                            <option value="1501-2000">$1501 - $2000</option>
+                            <option value="2000+">2000+</option>
+                        </Form.Control>
+                    </Form.Group>
+                </Col>
+            </Row>
+            <Form.Group controlId="searchInput">
+                <Form.Control
+                    type="text"
+                    placeholder="Шукайте тварин..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                />
+            </Form.Group>
+            <Button
+                variant="primary"
+                style={{ marginLeft: "2rem" }}
+                onClick={applyFilters}
+            >
+                Застосувати
+            </Button>
+        </div>
     );
 }
 
