@@ -1,5 +1,8 @@
+import React from "react";
+import { CartPage } from "./carttemplate.js";
+
 export const Cart = () => {
-    return(
-        <h1>Cart</h1>
-    )
-}
+  return (
+    <CartPage />
+  );
+};
