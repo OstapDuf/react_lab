@@ -6,6 +6,8 @@ import { Catalog } from "./main/catalog/catalog.js"
 import { Cart } from "./main/cart/cart.js"
 import AnimalDetail from "./main/catalog/view/view.js"
 import { AnimalsProvider } from "./data/dataRecive.js"
+import {CheckoutPage} from "./chechout/checkout.js"
+import {SuccessPage} from "./chechout/SuccessPage.js"
 
 
 
@@ -19,6 +21,8 @@ export const Routers = () => {
                     <Route path="catalog" element={<Catalog/>}></Route>
                     <Route path="catalog/:id" element={<AnimalDetail/>}/>
                     <Route path="cart" element={<Cart/>}></Route>
+                    <Route path="/checkout" element={<CheckoutPage />} />
+                    <Route path="/success" element={<SuccessPage />} />
                 </Route>
             </Routes>
         </BrowserRouter>

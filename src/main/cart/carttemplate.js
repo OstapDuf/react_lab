@@ -93,7 +93,8 @@ export const CartPage = () => {
                         <Link to="/Catalog">
                             <button className="btn btn-secondary">Back to Catalog</button>
                         </Link>
-                        <button className="btn btn-primary">Continue</button>
+                        <Link to="/checkout"> <button className="btn btn-primary">Continue</button></Link>
+                       
                     </div>
                 </div>
             )}
