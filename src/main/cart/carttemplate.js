@@ -34,7 +34,7 @@ export const CartPage = () => {
                             <div className="cart-item-details">
                                 <h4>{item.title}</h4>
                                 <p>
-                                    <strong>Price:</strong>{" "}
+                                    <strong>Price:</strong>
                                     {parseFloat(item.price).toFixed(2)} 
                                 </p>
                                 <div className="quantity-control">
