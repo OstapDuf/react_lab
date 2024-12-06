@@ -8,6 +8,10 @@ import AnimalDetail from "./main/catalog/view/view.js"
 import { AnimalsProvider } from "./data/dataRecive.js"
 import {CheckoutPage} from "./chechout/checkout.js"
 import {SuccessPage} from "./chechout/SuccessPage.js"
+import {Login} from './login/Login.js';
+import {Register} from './login/Register.js';
+import {ProtectedRoute} from './login/ProtectedRoute.js';
+
 
 
 
@@ -16,13 +20,15 @@ export const Routers = () => {
         <AnimalsProvider>
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<Layout/>}>
-                    <Route index element={<Home/>}></Route>
-                    <Route path="catalog" element={<Catalog/>}></Route>
-                    <Route path="catalog/:id" element={<AnimalDetail/>}/>
-                    <Route path="cart" element={<Cart/>}></Route>
-                    <Route path="/checkout" element={<CheckoutPage />} />
-                    <Route path="/success" element={<SuccessPage />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={ <Register />} />
+                <Route path="/" element={<ProtectedRoute><Layout/></ProtectedRoute>}>
+                    <Route index element={<ProtectedRoute><Home/></ProtectedRoute>}></Route>
+                    <Route path="catalog" element={<ProtectedRoute><Catalog/></ProtectedRoute>}></Route>
+                    <Route path="catalog/:id" element={<ProtectedRoute><AnimalDetail/></ProtectedRoute>}/>
+                    <Route path="cart" element={<ProtectedRoute><Cart/></ProtectedRoute>}></Route>
+                    <Route path="/checkout" element={<ProtectedRoute><CheckoutPage /></ProtectedRoute>} />
+                    <Route path="/success" element={<ProtectedRoute><SuccessPage /></ProtectedRoute>} />
                 </Route>
             </Routes>
         </BrowserRouter>
